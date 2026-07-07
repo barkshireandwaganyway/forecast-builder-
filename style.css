@@ -1,0 +1,851 @@
+:root{
+  --rb-blue:#0b55ff;
+  --rb-cyan:#35d6ff;
+  --rb-purple:#7c2cff;
+  --rb-pink:#d037ff;
+  --night:#061020;
+  --panel:#101827;
+  --panel2:#0b1322;
+  --line:#2b3d5e;
+  --text:#eef6ff;
+  --muted:#9db2d2;
+  --warning:#ffd43b;
+  --danger:#ff3b3b;
+  --good:#3de07f;
+  --cardBorder:#061020;
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  background:#050912;
+  color:var(--text);
+  font-family:Inter,Arial,Helvetica,sans-serif;
+  overflow:hidden;
+}
+button,input,select,textarea{font-family:inherit}
+.appShell{
+  height:100vh;
+  display:grid;
+  grid-template-columns:340px minmax(600px,1fr) 370px;
+  gap:12px;
+  padding:12px;
+}
+.controlPanel{
+  background:linear-gradient(180deg,#111d31,#0b1322);
+  border:1px solid #294061;
+  border-radius:18px;
+  box-shadow:0 20px 60px rgba(0,0,0,.45);
+  overflow:auto;
+  padding:14px;
+}
+.studioMark{display:grid;grid-template-columns:72px 1fr;gap:12px;align-items:center;margin-bottom:14px}
+.logoBox{
+  width:72px;height:72px;border-radius:16px;
+  display:flex;align-items:center;justify-content:center;
+  background:linear-gradient(135deg,var(--rb-blue),var(--rb-purple),var(--rb-pink));
+  color:white;font-weight:1000;font-size:18px;letter-spacing:.5px;
+  box-shadow:0 10px 24px rgba(0,0,0,.38);
+}
+.studioMark h1{font-size:19px;line-height:1.05;margin:0 0 5px;font-weight:1000}
+.studioMark p{font-size:12px;color:var(--muted);margin:0;line-height:1.25}
+.panelSection{border-top:1px solid #273b5c;padding-top:14px;margin-top:14px}
+.panelSection:first-of-type{border-top:0;padding-top:0;margin-top:0}
+.sectionTitle{font-size:13px;font-weight:1000;letter-spacing:.08em;text-transform:uppercase;color:#d9e7ff;margin:0 0 10px}
+.smallTitle{margin-top:18px;color:#9fd3ff}
+label{display:block;font-size:12px;font-weight:800;color:#b8c9e6;margin:10px 0 0}
+input,select,textarea{
+  width:100%;margin-top:6px;border:1px solid #31496d;border-radius:10px;
+  background:#07101f;color:#fff;padding:9px 10px;font-size:13px;outline:none;
+}
+input:focus,select:focus,textarea:focus{border-color:#72afff;box-shadow:0 0 0 2px rgba(50,130,255,.2)}
+textarea{resize:vertical;line-height:1.35}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.buttonGrid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}
+.buttonGrid.three{grid-template-columns:1fr 1fr 1fr}
+button,.fileBtn{
+  border:0;border-radius:11px;padding:10px 12px;color:white;font-weight:1000;font-size:12px;cursor:pointer;text-align:center;
+}
+.primaryBtn{background:linear-gradient(135deg,var(--rb-blue),var(--rb-purple));box-shadow:0 8px 20px rgba(13,76,255,.25)}
+.secondaryBtn,.fileBtn{background:#22324c;border:1px solid #354e73}
+.secondaryBtn:hover,.fileBtn:hover{background:#2a3b58}
+.danger{background:#4a2028;border-color:#723343}
+.fileBtn input{display:none}
+.fullBtn{width:100%;margin-top:12px}
+.statusBox{
+  margin-top:12px;border:1px solid #324768;border-radius:12px;background:#07101f;
+  color:#b6c7e4;padding:10px;font-size:12px;line-height:1.35;
+}
+.tabs{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-bottom:12px;position:sticky;top:0;background:#111d31;padding-bottom:10px;z-index:5}
+.tabBtn{background:#1a2940;border:1px solid #304866;color:#b8c9e6;padding:9px 0;border-radius:10px;font-size:12px}
+.tabBtn.active{background:linear-gradient(135deg,var(--rb-blue),var(--rb-purple));color:white}
+.tabPanel{display:none}.tabPanel.active{display:block}
+.editorBlock{background:#08111f;border:1px solid #263d5e;border-radius:14px;padding:12px;margin-top:10px}
+.mutedEditor{font-size:12px;color:#9db2d2;line-height:1.4}
+.inlineActions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+.checkRow{display:grid;grid-template-columns:22px 1fr;gap:8px;align-items:center;margin-top:8px;font-size:12px;color:#b8c9e6}
+.checkRow input{width:auto;margin:0}
+.graphicsLibrary{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:10px}
+.graphicPick{
+  background:#08111f;border:1px solid #334d74;border-radius:12px;min-height:58px;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;color:#fff;cursor:pointer;
+}
+.graphicPick:hover{border-color:#7db6ff;background:#10213a}
+.graphicPick .glyph{font-size:24px;line-height:1}.graphicPick span{font-size:10px;color:#b8c9e6;font-weight:900}
+.stageColumn{position:relative;min-width:0;display:grid;grid-template-rows:38px 1fr;gap:10px}
+.stageTopbar{display:flex;align-items:center;justify-content:center;gap:10px;overflow:hidden}
+.topPill{background:#101827;border:1px solid #2b3d5e;border-radius:999px;padding:8px 14px;font-size:12px;color:#b8c9e6;font-weight:900;white-space:nowrap}
+.stageViewport{
+  position:relative;overflow:auto;border-radius:18px;background:radial-gradient(circle at center,#12213a,#050912 64%);
+  border:1px solid #263d5e;box-shadow:inset 0 0 70px rgba(0,0,0,.55);
+}
+.slideFrame{position:absolute;left:50%;top:50%;width:1920px;height:1080px;transform-origin:center center}
+.slideCanvas{
+  position:relative;width:1920px;height:1080px;overflow:hidden;color:white;background:#07101f;
+  border:0;box-shadow:0 0 0 1px rgba(255,255,255,.14);isolation:isolate;
+}
+.backgroundTexture{position:absolute;inset:0;opacity:.24;background-image:linear-gradient(rgba(255,255,255,.045) 1px, transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px, transparent 1px);background-size:48px 48px;z-index:-4}
+.glow{position:absolute;border-radius:50%;filter:blur(42px);opacity:.45;z-index:-3}.glowBlue{width:780px;height:780px;background:#0b55ff;left:-260px;top:-260px}.glowPink{width:820px;height:820px;background:#b624ff;right:-280px;bottom:-280px}
+.bg-rbrtw{background:radial-gradient(circle at 15% 8%,#174cbd 0%,transparent 34%),linear-gradient(135deg,#061020 0%,#0b1d3b 44%,#230d45 100%)}
+.bg-severe{background:radial-gradient(circle at 20% 15%,#624100 0%,transparent 36%),linear-gradient(135deg,#080b10 0%,#3a1c00 47%,#4b0711 100%)}
+.bg-heat{background:radial-gradient(circle at 20% 12%,#ff7700 0%,transparent 34%),linear-gradient(135deg,#170707 0%,#532100 48%,#8c113d 100%)}
+.bg-rain{background:radial-gradient(circle at 20% 10%,#005aff 0%,transparent 35%),linear-gradient(135deg,#04101c 0%,#07365c 52%,#083f3f 100%)}
+.bg-winter{background:radial-gradient(circle at 20% 12%,#8ce5ff 0%,transparent 34%),linear-gradient(135deg,#07111f 0%,#143f68 50%,#41206d 100%)}
+.bg-clean{background:linear-gradient(135deg,#05080f 0%,#101827 55%,#07101f 100%)}
+.slideHeader{height:126px;display:grid;grid-template-columns:225px 1fr 235px;gap:24px;align-items:center;padding:20px 34px 17px;border-bottom:7px solid white;background:linear-gradient(90deg,rgba(2,8,20,.96),rgba(11,85,255,.42),rgba(124,44,255,.5),rgba(2,8,20,.94));z-index:2;position:relative}
+.brandLockup{height:86px;border-radius:18px;background:linear-gradient(135deg,var(--rb-blue),var(--rb-purple),var(--rb-pink));display:flex;flex-direction:column;align-items:center;justify-content:center;box-shadow:0 8px 18px rgba(0,0,0,.45);border:2px solid rgba(255,255,255,.22)}
+.brandText{font-size:38px;font-weight:1000;letter-spacing:1.5px;line-height:1}.brandSub{font-size:12px;font-weight:1000;letter-spacing:.08em;margin-top:6px;color:#e8eeff}.slideTitleOut{font-size:68px;font-weight:1000;letter-spacing:.5px;line-height:.94;text-shadow:0 4px 10px rgba(0,0,0,.7);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.slideSubtitleOut{font-size:24px;font-weight:900;color:#d9e8ff;margin-top:8px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.issueBlock{text-align:right;font-weight:1000}.issueBlock div{font-size:24px;color:#fff}.issueBlock span{display:block;margin-top:7px;font-size:17px;color:#bad5ff;line-height:1.18}.slideBody{height:904px;display:grid;grid-template-columns:342px 1fr;gap:16px;padding:18px 18px 12px 18px;position:relative;z-index:1}.intelPanel{display:flex;flex-direction:column;gap:12px;min-width:0}.intelCard{background:rgba(5,13,26,.89);border:3px solid rgba(255,255,255,.2);border-radius:18px;box-shadow:inset 0 0 28px rgba(255,255,255,.05),0 8px 18px rgba(0,0,0,.23);padding:15px;overflow:hidden}.cardLabel,.moduleLabel{font-size:20px;line-height:1;font-weight:1000;color:#91dcff;letter-spacing:.03em;margin-bottom:10px}.headlineCard{min-height:148px;border-color:rgba(77,202,255,.45)}.headlineText{font-size:28px;line-height:1.12;font-weight:1000}.impactsCard{min-height:268px;flex:1}.impactsText{white-space:pre-wrap;font-size:22px;line-height:1.24;font-weight:750}.miniGrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.miniCard{height:105px;border-radius:16px;background:rgba(5,13,26,.88);border:3px solid rgba(255,255,255,.18);padding:13px;display:flex;flex-direction:column;justify-content:center}.miniCard span{font-size:16px;font-weight:1000;color:#a8c3e8}.miniCard b{font-size:30px;margin-top:12px;line-height:1;font-weight:1000}.riskCard{min-height:170px;border-color:rgba(255,212,59,.62)}.riskText{font-size:20px;line-height:1.22;font-weight:850;white-space:pre-wrap}.forecastZone{display:grid;grid-template-rows:690px 1fr;gap:12px;min-width:0}.daysGrid{height:690px;display:grid;gap:8px}.dayCard{position:relative;display:grid;grid-template-rows:60px 80px auto 1fr 116px 54px;background:rgba(8,18,34,.92);border:5px solid var(--cardBorder);overflow:hidden;box-shadow:inset 0 0 0 2px rgba(255,255,255,.11),0 8px 18px rgba(0,0,0,.34);min-width:0}.dayCard.selectedDay{box-shadow:inset 0 0 0 7px rgba(79,195,255,.9),0 8px 18px rgba(0,0,0,.34)}
+.dayTop{background:#030912;border-bottom:4px solid white;color:white;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:1px}.dayName{font-size:31px;line-height:1;font-weight:1000;letter-spacing:.02em}.dateText{font-size:16px;font-weight:900;color:#bed3ef}.tempStrip{position:relative;display:flex;align-items:center;justify-content:center;gap:8px;background:linear-gradient(180deg,#ffec52 0%,#ff8a1c 48%,#d20e23 100%);color:white;text-shadow:0 3px 6px rgba(0,0,0,.75);border-bottom:4px solid #061020}.tempStrip.cold{background:linear-gradient(180deg,#d6f4ff 0%,#56b7ff 48%,#3360d7 100%)}.tempStrip.cool{background:linear-gradient(180deg,#f2f6ff 0%,#9cc6ff 48%,#4b75c9 100%)}.tempStrip.mild{background:linear-gradient(180deg,#ecffd6 0%,#7ad661 48%,#228e4a 100%)}.tempStrip.hot{background:linear-gradient(180deg,#ffe34d 0%,#ff6b18 48%,#c50b18 100%)}.tempStrip.extreme{background:linear-gradient(180deg,#ffd0f8 0%,#ff31c1 45%,#9b063e 100%)}.hiTemp{font-size:76px;line-height:.95;font-weight:1000}.loTemp{font-size:42px;font-weight:1000;opacity:.96}.hazardStack{display:grid;gap:0;border-bottom:4px solid #061020}.hazardBar{min-height:34px;padding:5px 6px;display:flex;align-items:center;justify-content:center;text-align:center;background:#ffd43b;color:#07101f;font-size:18px;line-height:1;font-weight:1000}.hazardBar.secondary{background:#66d9ff}.hazardBar.empty{background:#18263b;color:#92a8c8}.hazard-badges .hazardStack{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:5px;padding:6px;background:#061020}.hazard-badges .hazardBar{border-radius:999px;min-height:26px;font-size:14px;padding:5px 9px}.iconBlock{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:8px 7px;min-width:0}.weatherIcon{font-size:84px;line-height:1;margin-bottom:8px;filter:drop-shadow(0 4px 3px rgba(0,0,0,.5))}.weatherIcon.hiddenIcon{display:none}.forecastText{font-size:22px;line-height:1.05;font-weight:1000;max-width:100%;overflow:hidden;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical}.metricBlock{display:grid;grid-template-columns:1fr;gap:4px;background:#0d1a31;border-top:4px solid #061020;padding:6px 8px}.metricRow{display:flex;justify-content:space-between;gap:8px;align-items:baseline;font-size:18px;line-height:1.05;font-weight:1000;white-space:nowrap;overflow:hidden}.metricRow span{color:#adc2e2}.metricRow b{overflow:hidden;text-overflow:ellipsis}.tagStrip{display:flex;align-items:center;justify-content:center;text-align:center;padding:6px;background:#030912;border-top:4px solid white;font-size:21px;line-height:1;font-weight:1000}.lowerDeck{display:grid;grid-template-columns:1.08fr 1fr 1fr;gap:10px;min-height:0}.lowerModule{background:rgba(5,13,26,.9);border:3px solid rgba(255,255,255,.22);border-radius:18px;padding:15px;overflow:hidden;box-shadow:inset 0 0 22px rgba(255,255,255,.06)}.lowerModule>div:last-child{font-size:21px;line-height:1.15;font-weight:850;white-space:pre-wrap}.timingModule{border-color:rgba(63,207,255,.46)}.outdoorModule{border-color:rgba(61,224,127,.42)}.notesModule{border-color:rgba(255,212,59,.46)}.overlayLayer{position:absolute;inset:0;z-index:5;pointer-events:none}.overlayItem{position:absolute;display:flex;align-items:center;justify-content:center;text-align:center;pointer-events:auto;cursor:move;user-select:none;transform-origin:center center}.overlayItem.locked{cursor:not-allowed}.overlayItem.selectedOverlay{outline:5px dashed rgba(74,209,255,.95);outline-offset:4px}.overlayText{width:100%;height:100%;border-radius:18px;background:linear-gradient(135deg,#0b55ff,#7c2cff);border:3px solid rgba(255,255,255,.28);box-shadow:0 8px 18px rgba(0,0,0,.4);font-size:34px;line-height:1.05;font-weight:1000;padding:14px;white-space:pre-wrap}.overlayEmoji{font-size:92px;line-height:1;filter:drop-shadow(0 6px 4px rgba(0,0,0,.55))}.overlayItem img{width:100%;height:100%;object-fit:contain;display:block}.slideFooter{height:50px;display:flex;align-items:center;justify-content:space-between;gap:20px;padding:0 34px;background:rgba(2,7,15,.92);border-top:4px solid rgba(255,255,255,.74);font-size:18px;font-weight:900;color:#d5e4ff;position:relative;z-index:2}.slideFooter span:last-child{color:#a9c0e2}
+/* Count-based forecast scaling */
+.daysGrid.count-1{grid-template-columns:1fr}.daysGrid.count-2{grid-template-columns:repeat(2,1fr)}.daysGrid.count-3{grid-template-columns:repeat(3,1fr)}.daysGrid.count-4{grid-template-columns:repeat(4,1fr)}.daysGrid.count-5{grid-template-columns:repeat(5,1fr)}.daysGrid.count-6{grid-template-columns:repeat(6,1fr)}.daysGrid.count-7{grid-template-columns:repeat(7,1fr)}.daysGrid.count-8{grid-template-columns:repeat(8,1fr)}.daysGrid.count-9{grid-template-columns:repeat(9,1fr)}.daysGrid.count-10{grid-template-columns:repeat(10,1fr)}
+.daysGrid.count-1 .dayCard,.daysGrid.count-2 .dayCard,.daysGrid.count-3 .dayCard{grid-template-rows:76px 112px auto 1fr 126px 62px}.daysGrid.count-1 .dayName,.daysGrid.count-2 .dayName,.daysGrid.count-3 .dayName{font-size:42px}.daysGrid.count-1 .dateText,.daysGrid.count-2 .dateText,.daysGrid.count-3 .dateText{font-size:20px}.daysGrid.count-1 .hiTemp,.daysGrid.count-2 .hiTemp,.daysGrid.count-3 .hiTemp{font-size:100px}.daysGrid.count-1 .loTemp,.daysGrid.count-2 .loTemp,.daysGrid.count-3 .loTemp{font-size:58px}.daysGrid.count-1 .weatherIcon,.daysGrid.count-2 .weatherIcon,.daysGrid.count-3 .weatherIcon{font-size:118px}.daysGrid.count-1 .forecastText,.daysGrid.count-2 .forecastText,.daysGrid.count-3 .forecastText{font-size:30px}.daysGrid.count-1 .metricRow,.daysGrid.count-2 .metricRow,.daysGrid.count-3 .metricRow{font-size:22px}.daysGrid.count-1 .hazardBar,.daysGrid.count-2 .hazardBar,.daysGrid.count-3 .hazardBar{font-size:22px;min-height:42px}.daysGrid.count-1 .tagStrip,.daysGrid.count-2 .tagStrip,.daysGrid.count-3 .tagStrip{font-size:26px}
+.daysGrid.count-8 .dayCard,.daysGrid.count-9 .dayCard,.daysGrid.count-10 .dayCard,.density-compact .dayCard{grid-template-rows:54px 70px auto 1fr 108px 50px}.daysGrid.count-8 .dayName,.daysGrid.count-9 .dayName,.daysGrid.count-10 .dayName,.density-compact .dayName{font-size:25px}.daysGrid.count-8 .dateText,.daysGrid.count-9 .dateText,.daysGrid.count-10 .dateText,.density-compact .dateText{font-size:14px}.daysGrid.count-8 .hiTemp,.daysGrid.count-9 .hiTemp,.daysGrid.count-10 .hiTemp,.density-compact .hiTemp{font-size:58px}.daysGrid.count-8 .loTemp,.daysGrid.count-9 .loTemp,.daysGrid.count-10 .loTemp,.density-compact .loTemp{font-size:31px}.daysGrid.count-8 .weatherIcon,.daysGrid.count-9 .weatherIcon,.daysGrid.count-10 .weatherIcon,.density-compact .weatherIcon{font-size:62px}.daysGrid.count-8 .forecastText,.daysGrid.count-9 .forecastText,.daysGrid.count-10 .forecastText,.density-compact .forecastText{font-size:17px}.daysGrid.count-8 .metricRow,.daysGrid.count-9 .metricRow,.daysGrid.count-10 .metricRow,.density-compact .metricRow{font-size:14px}.daysGrid.count-8 .hazardBar,.daysGrid.count-9 .hazardBar,.daysGrid.count-10 .hazardBar,.density-compact .hazardBar{font-size:14px;min-height:28px;padding:3px 4px}.daysGrid.count-8 .tagStrip,.daysGrid.count-9 .tagStrip,.daysGrid.count-10 .tagStrip,.density-compact .tagStrip{font-size:16px}.daysGrid.count-9 .dayCard,.daysGrid.count-10 .dayCard{border-width:4px}.daysGrid.count-9,.daysGrid.count-10{gap:6px}.daysGrid.count-10 .metricBlock{padding:5px 5px}
+.density-big .dayCard{grid-template-rows:76px 112px auto 1fr 126px 62px}.density-big .dayName{font-size:42px}.density-big .hiTemp{font-size:100px}.density-big .loTemp{font-size:58px}.density-big .weatherIcon{font-size:118px}.density-big .forecastText{font-size:30px}.density-big .metricRow{font-size:22px}.density-big .hazardBar{font-size:22px;min-height:42px}.density-big .tagStrip{font-size:26px}
+.exportCover{display:none;position:fixed;inset:0;background:rgba(0,0,0,.72);z-index:50;align-items:center;justify-content:center;font-size:28px;font-weight:1000;color:white}.exporting .exportCover{display:flex}.exporting .selectedDay,.exporting .selectedOverlay{box-shadow:none!important;outline:none!important}.exporting .noExport{display:none!important}
+@media(max-width:1200px){.appShell{grid-template-columns:310px minmax(480px,1fr) 330px}.controlPanel{padding:12px}.topPill{font-size:11px;padding:7px 10px}}
+
+/* User requested cleanup: modules are invisible unless checked or auto-enabled by real data. */
+.hiddenModule{display:none!important}
+.slideBody.noLeftPanel{grid-template-columns:1fr;gap:0}
+.forecastZone.noLowerDeck{grid-template-rows:1fr}
+.forecastZone.noLowerDeck .daysGrid{height:100%}
+.lowerDeck{grid-template-columns:repeat(auto-fit,minmax(0,1fr))}
+.miniGrid{grid-template-columns:1fr}
+.slideFooter span:empty{display:none}
+.exportClone{position:fixed!important;left:-10000px!important;top:0!important;width:1920px!important;height:1080px!important;transform:none!important;z-index:-1!important;pointer-events:none!important}
+.exporting .exportClone{display:block!important}
+
+/* Forecast tile fit fixes */
+.metricBlock{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:5px;background:#0d1a31;border-top:4px solid #061020;padding:7px 7px;align-content:center}
+.metricPair{min-width:0;display:grid;grid-template-columns:auto minmax(0,1fr);gap:5px;align-items:center;font-size:16px;line-height:1.05;font-weight:1000;white-space:nowrap;overflow:hidden}
+.metricPair span{color:#adc2e2;font-size:.78em;letter-spacing:.02em}
+.metricPair b{min-width:0;overflow:hidden;text-overflow:ellipsis;text-align:right}
+.daysGrid.count-8 .metricBlock,.daysGrid.count-9 .metricBlock,.daysGrid.count-10 .metricBlock,.density-compact .metricBlock{gap:3px;padding:5px 5px;grid-template-columns:1fr}
+.daysGrid.count-8 .metricPair,.daysGrid.count-9 .metricPair,.daysGrid.count-10 .metricPair,.density-compact .metricPair{font-size:11px;grid-template-columns:28px minmax(0,1fr);gap:3px}
+.daysGrid.count-8 .metricPair span,.daysGrid.count-9 .metricPair span,.daysGrid.count-10 .metricPair span,.density-compact .metricPair span{font-size:10px}
+.daysGrid.count-8 .forecastText,.daysGrid.count-9 .forecastText,.daysGrid.count-10 .forecastText,.density-compact .forecastText{font-size:15px;line-height:1.08;-webkit-line-clamp:3}
+.daysGrid.count-8 .weatherIcon,.daysGrid.count-9 .weatherIcon,.daysGrid.count-10 .weatherIcon,.density-compact .weatherIcon{font-size:54px;margin-bottom:5px}
+.daysGrid.count-8 .hazardBar,.daysGrid.count-9 .hazardBar,.daysGrid.count-10 .hazardBar,.density-compact .hazardBar{font-size:12px;min-height:25px;line-height:1.02}
+.daysGrid.count-10 .hiTemp{font-size:54px}.daysGrid.count-10 .loTemp{font-size:29px}.daysGrid.count-10 .dayName{font-size:23px}
+.dayCard{grid-template-rows:60px 80px auto minmax(0,1fr) auto 54px}.daysGrid.count-8 .dayCard,.daysGrid.count-9 .dayCard,.daysGrid.count-10 .dayCard,.density-compact .dayCard{grid-template-rows:52px 68px auto minmax(0,1fr) auto 46px}
+.exporting #exportCover{display:flex!important}
+
+/* V3: keep 8-10 day forecast tiles readable inside a fixed 1920x1080 broadcast slide. */
+.forecastZone{grid-template-rows:minmax(0,1fr) auto}
+.daysGrid{height:auto;min-height:0}
+.slideBody.wideForecastMode{grid-template-columns:250px minmax(0,1fr);gap:10px;padding:14px 14px 10px 14px}
+.slideBody.wideForecastMode.noLeftPanel{grid-template-columns:1fr;padding-left:18px;padding-right:18px}
+.slideBody.midForecastMode{grid-template-columns:300px minmax(0,1fr);gap:12px}
+.slideBody.wideForecastMode .intelPanel{gap:8px}
+.slideBody.wideForecastMode .intelCard{padding:11px;border-radius:12px;border-width:2px}
+.slideBody.wideForecastMode .cardLabel{font-size:15px;margin-bottom:6px}
+.slideBody.wideForecastMode .headlineText{font-size:20px;line-height:1.08}
+.slideBody.wideForecastMode .impactsText,.slideBody.wideForecastMode .riskText{font-size:16px;line-height:1.12}
+.slideBody.wideForecastMode .miniCard{height:70px;padding:9px;border-width:2px;border-radius:12px}
+.slideBody.wideForecastMode .miniCard span{font-size:12px}.slideBody.wideForecastMode .miniCard b{font-size:22px;margin-top:6px}
+.slideBody.wideForecastMode .riskCard{min-height:120px}.slideBody.wideForecastMode .headlineCard{min-height:110px}.slideBody.wideForecastMode .impactsCard{min-height:160px}
+.slideBody.wideForecastMode .lowerDeck{gap:8px}
+.slideBody.wideForecastMode .lowerModule{padding:10px;border-radius:12px;border-width:2px;max-height:132px}
+.slideBody.wideForecastMode .moduleLabel{font-size:16px;margin-bottom:6px}
+.slideBody.wideForecastMode .lowerModule>div:last-child{font-size:16px;line-height:1.08}
+
+.daysGrid.count-8,.daysGrid.count-9,.daysGrid.count-10{gap:5px}
+.daysGrid.count-8 .dayCard,.daysGrid.count-9 .dayCard,.daysGrid.count-10 .dayCard{border-width:3px;grid-template-rows:48px 64px auto minmax(0,1fr) auto 42px}
+.daysGrid.count-8 .dayTop,.daysGrid.count-9 .dayTop,.daysGrid.count-10 .dayTop{border-bottom-width:3px}
+.daysGrid.count-8 .dayName,.daysGrid.count-9 .dayName,.daysGrid.count-10 .dayName{font-size:22px;line-height:.95}
+.daysGrid.count-8 .dateText,.daysGrid.count-9 .dateText,.daysGrid.count-10 .dateText{font-size:11px;line-height:.95}
+.daysGrid.count-8 .tempStrip,.daysGrid.count-9 .tempStrip,.daysGrid.count-10 .tempStrip{gap:3px;border-bottom-width:3px;overflow:hidden;white-space:nowrap}
+.daysGrid.count-8 .hiTemp,.daysGrid.count-9 .hiTemp,.daysGrid.count-10 .hiTemp{font-size:52px;letter-spacing:-2px;flex:0 0 auto}
+.daysGrid.count-8 .loTemp,.daysGrid.count-9 .loTemp,.daysGrid.count-10 .loTemp{font-size:24px;letter-spacing:-1px;flex:0 1 auto;min-width:0;overflow:hidden;text-overflow:clip}
+.daysGrid.count-8 .hazardStack,.daysGrid.count-9 .hazardStack,.daysGrid.count-10 .hazardStack{border-bottom-width:3px}
+.daysGrid.count-8 .hazardBar,.daysGrid.count-9 .hazardBar,.daysGrid.count-10 .hazardBar{font-size:10px;min-height:22px;padding:3px 3px;line-height:1;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+.daysGrid.count-8 .iconBlock,.daysGrid.count-9 .iconBlock,.daysGrid.count-10 .iconBlock{padding:5px 4px;overflow:hidden}
+.daysGrid.count-8 .weatherIcon,.daysGrid.count-9 .weatherIcon,.daysGrid.count-10 .weatherIcon{font-size:50px;margin-bottom:4px}
+.daysGrid.count-8 .forecastText,.daysGrid.count-9 .forecastText,.daysGrid.count-10 .forecastText{font-size:13px;line-height:1.02;-webkit-line-clamp:2;overflow-wrap:anywhere}
+.daysGrid.count-8 .metricBlock,.daysGrid.count-9 .metricBlock,.daysGrid.count-10 .metricBlock{grid-template-columns:1fr;gap:2px;padding:4px 4px;border-top-width:3px;align-content:center;max-height:92px;overflow:hidden}
+.daysGrid.count-8 .metricPair,.daysGrid.count-9 .metricPair,.daysGrid.count-10 .metricPair{font-size:10.5px;grid-template-columns:25px minmax(0,1fr);gap:3px;line-height:1;min-height:10px}
+.daysGrid.count-8 .metricPair span,.daysGrid.count-9 .metricPair span,.daysGrid.count-10 .metricPair span{font-size:8px;line-height:1}
+.daysGrid.count-8 .metricPair b,.daysGrid.count-9 .metricPair b,.daysGrid.count-10 .metricPair b{text-align:right;overflow:hidden;text-overflow:ellipsis}
+.daysGrid.count-8 .tagStrip,.daysGrid.count-9 .tagStrip,.daysGrid.count-10 .tagStrip{font-size:13px;border-top-width:3px;padding:4px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+
+.daysGrid.count-10 .dayCard{grid-template-rows:46px 61px auto minmax(0,1fr) auto 40px}
+.daysGrid.count-10 .dayName{font-size:20px}.daysGrid.count-10 .dateText{font-size:10px}
+.daysGrid.count-10 .hiTemp{font-size:49px}.daysGrid.count-10 .loTemp{font-size:22px}
+.daysGrid.count-10 .weatherIcon{font-size:45px}.daysGrid.count-10 .forecastText{font-size:12px}
+.daysGrid.count-10 .metricPair{font-size:9.5px}.daysGrid.count-10 .metricPair span{font-size:7.5px}.daysGrid.count-10 .tagStrip{font-size:12px}
+
+/* Export clone is rendered at actual size behind the export cover, so the PNG is not a screenshot of the scaled viewport. */
+.exportClone{position:fixed!important;left:0!important;top:0!important;width:1920px!important;height:1080px!important;transform:none!important;z-index:40!important;pointer-events:none!important;margin:0!important}
+.exporting .exportClone{display:block!important}
+
+/* V4 readability pass: use empty vertical space inside day cards for bigger bottom data and move icons upward. */
+.dayCard{
+  align-content:stretch;
+}
+.iconBlock{
+  justify-content:flex-start;
+  padding-top:28px;
+  padding-bottom:8px;
+}
+.metricBlock{
+  min-height:132px;
+  align-content:center;
+}
+.metricPair{
+  min-height:22px;
+}
+
+/* In 8-10 day views, the old layout made the data block tiny while the center stayed empty. */
+.daysGrid.count-8 .dayCard,
+.daysGrid.count-9 .dayCard,
+.daysGrid.count-10 .dayCard{
+  grid-template-rows:48px 64px auto minmax(0,1fr) 148px 46px;
+}
+.daysGrid.count-8 .iconBlock,
+.daysGrid.count-9 .iconBlock,
+.daysGrid.count-10 .iconBlock{
+  justify-content:flex-start;
+  padding:26px 5px 6px;
+}
+.daysGrid.count-8 .weatherIcon,
+.daysGrid.count-9 .weatherIcon,
+.daysGrid.count-10 .weatherIcon{
+  font-size:64px;
+  margin-bottom:8px;
+}
+.daysGrid.count-8 .forecastText,
+.daysGrid.count-9 .forecastText,
+.daysGrid.count-10 .forecastText{
+  font-size:14px;
+  line-height:1.08;
+  -webkit-line-clamp:3;
+}
+.daysGrid.count-8 .metricBlock,
+.daysGrid.count-9 .metricBlock,
+.daysGrid.count-10 .metricBlock{
+  min-height:148px;
+  max-height:none;
+  padding:8px 7px;
+  gap:5px;
+  align-content:center;
+}
+.daysGrid.count-8 .metricPair,
+.daysGrid.count-9 .metricPair,
+.daysGrid.count-10 .metricPair{
+  font-size:13.5px;
+  grid-template-columns:36px minmax(0,1fr);
+  gap:5px;
+  min-height:20px;
+  line-height:1.02;
+}
+.daysGrid.count-8 .metricPair span,
+.daysGrid.count-9 .metricPair span,
+.daysGrid.count-10 .metricPair span{
+  font-size:9.5px;
+  line-height:1;
+}
+.daysGrid.count-8 .tagStrip,
+.daysGrid.count-9 .tagStrip,
+.daysGrid.count-10 .tagStrip{
+  font-size:15px;
+  min-height:46px;
+}
+
+/* 10 day needs the same treatment, not a smaller override. */
+.daysGrid.count-10 .dayCard{
+  grid-template-rows:46px 61px auto minmax(0,1fr) 150px 44px;
+}
+.daysGrid.count-10 .weatherIcon{font-size:60px;margin-bottom:7px}
+.daysGrid.count-10 .forecastText{font-size:13.5px;line-height:1.06;-webkit-line-clamp:3}
+.daysGrid.count-10 .metricBlock{min-height:150px;padding:8px 6px;gap:5px}
+.daysGrid.count-10 .metricPair{font-size:13px;grid-template-columns:34px minmax(0,1fr);min-height:20px;gap:4px}
+.daysGrid.count-10 .metricPair span{font-size:9px}
+.daysGrid.count-10 .tagStrip{font-size:14px;min-height:44px}
+
+/* If the lower modules are hidden, keep the day data readable instead of stretching the middle into a huge blank space. */
+.forecastZone.noLowerDeck .daysGrid.count-8 .dayCard,
+.forecastZone.noLowerDeck .daysGrid.count-9 .dayCard,
+.forecastZone.noLowerDeck .daysGrid.count-10 .dayCard{
+  grid-template-rows:48px 66px auto minmax(260px,1fr) 165px 50px;
+}
+.forecastZone.noLowerDeck .daysGrid.count-10 .dayCard{
+  grid-template-rows:46px 63px auto minmax(250px,1fr) 165px 48px;
+}
+.forecastZone.noLowerDeck .daysGrid.count-8 .metricBlock,
+.forecastZone.noLowerDeck .daysGrid.count-9 .metricBlock,
+.forecastZone.noLowerDeck .daysGrid.count-10 .metricBlock{
+  min-height:165px;
+}
+
+
+/* V5 readability and display controls: no text ellipses, stacked metrics, optional bottom tag with color picker. */
+.slideCanvas{--bottom-tag-bg:#030912}
+.forecastText{
+  display:block!important;
+  -webkit-line-clamp:unset!important;
+  -webkit-box-orient:initial!important;
+  max-height:none!important;
+  overflow:visible!important;
+  text-overflow:clip!important;
+  white-space:normal!important;
+  overflow-wrap:anywhere!important;
+  word-break:normal!important;
+}
+.iconBlock{overflow:visible!important;justify-content:flex-start!important}
+.metricBlock{
+  grid-template-columns:1fr!important;
+  align-content:center!important;
+  gap:7px!important;
+  padding:10px 9px!important;
+  min-height:auto!important;
+  max-height:none!important;
+}
+.metricPair{
+  grid-template-columns:48px minmax(0,1fr)!important;
+  gap:8px!important;
+  white-space:normal!important;
+  overflow:visible!important;
+  min-height:23px!important;
+  line-height:1.05!important;
+  font-size:17px!important;
+}
+.metricPair span{font-size:12px!important;line-height:1!important}
+.metricPair b{
+  overflow:visible!important;
+  text-overflow:clip!important;
+  white-space:normal!important;
+  text-align:right!important;
+  line-height:1.05!important;
+}
+.tagStrip{background:var(--bottom-tag-bg)!important;min-height:46px}
+.dayCard{grid-template-rows:60px 80px auto minmax(0,1fr) auto auto!important}
+.daysGrid.count-1 .dayCard,.daysGrid.count-2 .dayCard,.daysGrid.count-3 .dayCard{grid-template-rows:76px 112px auto minmax(0,1fr) auto auto!important}
+.daysGrid.count-8 .dayCard,.daysGrid.count-9 .dayCard,.daysGrid.count-10 .dayCard{grid-template-rows:48px 64px auto minmax(0,1fr) auto auto!important}
+.daysGrid.count-10 .dayCard{grid-template-rows:46px 61px auto minmax(0,1fr) auto auto!important}
+.forecastZone.noLowerDeck .daysGrid.count-8 .dayCard,.forecastZone.noLowerDeck .daysGrid.count-9 .dayCard,.forecastZone.noLowerDeck .daysGrid.count-10 .dayCard{grid-template-rows:48px 66px auto minmax(0,1fr) auto auto!important}
+.forecastZone.noLowerDeck .daysGrid.count-10 .dayCard{grid-template-rows:46px 63px auto minmax(0,1fr) auto auto!important}
+.daysGrid.count-8 .iconBlock,.daysGrid.count-9 .iconBlock,.daysGrid.count-10 .iconBlock{padding:22px 5px 8px!important}
+.daysGrid.count-8 .forecastText,.daysGrid.count-9 .forecastText,.daysGrid.count-10 .forecastText{font-size:14px!important;line-height:1.08!important}
+.daysGrid.count-10 .forecastText{font-size:13px!important;line-height:1.07!important}
+.daysGrid.count-8 .metricBlock,.daysGrid.count-9 .metricBlock,.daysGrid.count-10 .metricBlock{padding:9px 6px!important;gap:6px!important}
+.daysGrid.count-8 .metricPair,.daysGrid.count-9 .metricPair,.daysGrid.count-10 .metricPair{grid-template-columns:34px minmax(0,1fr)!important;font-size:13px!important;min-height:20px!important;gap:5px!important}
+.daysGrid.count-8 .metricPair span,.daysGrid.count-9 .metricPair span,.daysGrid.count-10 .metricPair span{font-size:9px!important}
+.daysGrid.count-10 .metricPair{grid-template-columns:31px minmax(0,1fr)!important;font-size:12.3px!important;gap:4px!important}
+.daysGrid.count-10 .metricPair span{font-size:8.5px!important}
+.daysGrid.count-8 .tagStrip,.daysGrid.count-9 .tagStrip,.daysGrid.count-10 .tagStrip{font-size:14px!important;min-height:43px!important;white-space:normal!important;text-overflow:clip!important}
+.dayCard.noMetrics .metricBlock,.hide-bottom-metrics .metricBlock{display:none!important}
+.dayCard.noTag .tagStrip,.hide-bottom-tag .tagStrip{display:none!important}
+
+/* V6 metric readability: enlarge RAIN / AMT / WIND / GUST / HUMID labels and values. */
+.metricBlock{
+  padding:14px 14px!important;
+  gap:9px!important;
+  align-content:center!important;
+}
+.metricPair{
+  grid-template-columns:66px minmax(0,1fr)!important;
+  gap:10px!important;
+  min-height:29px!important;
+  font-size:22px!important;
+  line-height:1.06!important;
+}
+.metricPair span{
+  font-size:15px!important;
+  letter-spacing:.04em!important;
+  color:#bfe0ff!important;
+}
+.metricPair b{
+  font-size:22px!important;
+  line-height:1.06!important;
+  text-align:right!important;
+}
+.daysGrid.count-1 .metricPair,
+.daysGrid.count-2 .metricPair,
+.daysGrid.count-3 .metricPair{
+  grid-template-columns:72px minmax(0,1fr)!important;
+  min-height:32px!important;
+  font-size:24px!important;
+}
+.daysGrid.count-1 .metricPair span,
+.daysGrid.count-2 .metricPair span,
+.daysGrid.count-3 .metricPair span{
+  font-size:16px!important;
+}
+.daysGrid.count-1 .metricPair b,
+.daysGrid.count-2 .metricPair b,
+.daysGrid.count-3 .metricPair b{
+  font-size:24px!important;
+}
+.daysGrid.count-4 .metricPair,
+.daysGrid.count-5 .metricPair,
+.daysGrid.count-6 .metricPair,
+.daysGrid.count-7 .metricPair{
+  grid-template-columns:58px minmax(0,1fr)!important;
+  min-height:27px!important;
+  font-size:19px!important;
+  gap:8px!important;
+}
+.daysGrid.count-4 .metricPair span,
+.daysGrid.count-5 .metricPair span,
+.daysGrid.count-6 .metricPair span,
+.daysGrid.count-7 .metricPair span{
+  font-size:13px!important;
+}
+.daysGrid.count-4 .metricPair b,
+.daysGrid.count-5 .metricPair b,
+.daysGrid.count-6 .metricPair b,
+.daysGrid.count-7 .metricPair b{
+  font-size:19px!important;
+}
+.daysGrid.count-8 .metricBlock,
+.daysGrid.count-9 .metricBlock,
+.daysGrid.count-10 .metricBlock{
+  padding:10px 7px!important;
+  gap:6px!important;
+}
+.daysGrid.count-8 .metricPair,
+.daysGrid.count-9 .metricPair{
+  grid-template-columns:40px minmax(0,1fr)!important;
+  min-height:21px!important;
+  font-size:14px!important;
+  gap:5px!important;
+}
+.daysGrid.count-8 .metricPair span,
+.daysGrid.count-9 .metricPair span{
+  font-size:10px!important;
+}
+.daysGrid.count-8 .metricPair b,
+.daysGrid.count-9 .metricPair b{
+  font-size:14px!important;
+}
+.daysGrid.count-10 .metricPair{
+  grid-template-columns:34px minmax(0,1fr)!important;
+  min-height:20px!important;
+  font-size:13px!important;
+  gap:4px!important;
+}
+.daysGrid.count-10 .metricPair span{
+  font-size:9px!important;
+}
+.daysGrid.count-10 .metricPair b{
+  font-size:13px!important;
+}
+
+
+/* V7: heat index / wind chill now render in the bottom stacked metric block when data exists.
+   Keep six rows readable by letting the metric area take real space from the unused icon area. */
+.daysGrid.count-1 .dayCard,.daysGrid.count-2 .dayCard,.daysGrid.count-3 .dayCard{grid-template-rows:76px 112px auto minmax(0,1fr) auto auto!important}
+.metricBlock{align-content:start!important}
+.daysGrid.count-1 .metricBlock,.daysGrid.count-2 .metricBlock,.daysGrid.count-3 .metricBlock{padding:14px 16px!important;gap:8px!important}
+.daysGrid.count-1 .metricPair,.daysGrid.count-2 .metricPair,.daysGrid.count-3 .metricPair{min-height:27px!important}
+.daysGrid.count-4 .metricBlock,.daysGrid.count-5 .metricBlock,.daysGrid.count-6 .metricBlock,.daysGrid.count-7 .metricBlock{padding:10px 9px!important;gap:6px!important}
+.daysGrid.count-4 .metricPair,.daysGrid.count-5 .metricPair,.daysGrid.count-6 .metricPair,.daysGrid.count-7 .metricPair{min-height:22px!important}
+.daysGrid.count-8 .metricBlock,.daysGrid.count-9 .metricBlock,.daysGrid.count-10 .metricBlock{padding:8px 6px!important;gap:4px!important}
+.daysGrid.count-8 .metricPair,.daysGrid.count-9 .metricPair,.daysGrid.count-10 .metricPair{min-height:17px!important}
+
+/* V8 layout compression and auto-fit readability pass.
+   The day cards were wasting space in the middle. These rules make the icon/text area only use
+   the space it needs and give the bottom data block the larger readable area. */
+.dayCard{
+  align-content:stretch!important;
+}
+.iconBlock{
+  justify-content:flex-start!important;
+  align-content:start!important;
+  overflow:visible!important;
+}
+.weatherIcon{
+  flex:0 0 auto!important;
+}
+.forecastText{
+  flex:0 0 auto!important;
+  width:100%!important;
+  max-width:100%!important;
+}
+.metricBlock{
+  align-self:stretch!important;
+  align-content:center!important;
+  justify-content:stretch!important;
+  overflow:visible!important;
+}
+.metricPair{
+  align-items:center!important;
+}
+.metricPair b{
+  overflow-wrap:anywhere!important;
+  word-break:normal!important;
+}
+
+/* 1-3 days: very readable broadcast cards. */
+.daysGrid.count-1 .dayCard,
+.daysGrid.count-2 .dayCard,
+.daysGrid.count-3 .dayCard{
+  grid-template-rows:76px 112px auto minmax(245px,.72fr) minmax(225px,1fr) auto!important;
+}
+.daysGrid.count-1 .iconBlock,
+.daysGrid.count-2 .iconBlock,
+.daysGrid.count-3 .iconBlock{padding:42px 16px 12px!important}
+.daysGrid.count-1 .weatherIcon,
+.daysGrid.count-2 .weatherIcon,
+.daysGrid.count-3 .weatherIcon{font-size:122px!important;margin-bottom:12px!important}
+.daysGrid.count-1 .forecastText,
+.daysGrid.count-2 .forecastText,
+.daysGrid.count-3 .forecastText{font-size:31px!important;line-height:1.05!important}
+.daysGrid.count-1 .metricBlock,
+.daysGrid.count-2 .metricBlock,
+.daysGrid.count-3 .metricBlock{padding:18px 22px!important;gap:10px!important}
+.daysGrid.count-1 .metricPair,
+.daysGrid.count-2 .metricPair,
+.daysGrid.count-3 .metricPair{grid-template-columns:88px minmax(0,1fr)!important;min-height:34px!important;font-size:27px!important;gap:14px!important}
+.daysGrid.count-1 .metricPair span,
+.daysGrid.count-2 .metricPair span,
+.daysGrid.count-3 .metricPair span{font-size:19px!important}
+.daysGrid.count-1 .metricPair b,
+.daysGrid.count-2 .metricPair b,
+.daysGrid.count-3 .metricPair b{font-size:27px!important}
+
+/* 4-5 days: still large, but move data up and enlarge it. */
+.daysGrid.count-4 .dayCard,
+.daysGrid.count-5 .dayCard{
+  grid-template-rows:60px 80px auto minmax(215px,.72fr) minmax(215px,1fr) auto!important;
+}
+.daysGrid.count-4 .iconBlock,
+.daysGrid.count-5 .iconBlock{padding:34px 10px 10px!important}
+.daysGrid.count-4 .weatherIcon,
+.daysGrid.count-5 .weatherIcon{font-size:88px!important;margin-bottom:10px!important}
+.daysGrid.count-4 .forecastText,
+.daysGrid.count-5 .forecastText{font-size:22px!important;line-height:1.05!important}
+.daysGrid.count-4 .metricBlock,
+.daysGrid.count-5 .metricBlock{padding:13px 12px!important;gap:8px!important}
+.daysGrid.count-4 .metricPair,
+.daysGrid.count-5 .metricPair{grid-template-columns:62px minmax(0,1fr)!important;min-height:29px!important;font-size:21px!important;gap:9px!important}
+.daysGrid.count-4 .metricPair span,
+.daysGrid.count-5 .metricPair span{font-size:14px!important}
+.daysGrid.count-4 .metricPair b,
+.daysGrid.count-5 .metricPair b{font-size:21px!important}
+
+/* 6-7 days: balance icon/text against stacked data rows. */
+.daysGrid.count-6 .dayCard,
+.daysGrid.count-7 .dayCard{
+  grid-template-rows:54px 72px auto minmax(190px,.65fr) minmax(220px,1fr) auto!important;
+}
+.daysGrid.count-6 .iconBlock,
+.daysGrid.count-7 .iconBlock{padding:28px 7px 8px!important}
+.daysGrid.count-6 .weatherIcon,
+.daysGrid.count-7 .weatherIcon{font-size:70px!important;margin-bottom:8px!important}
+.daysGrid.count-6 .forecastText,
+.daysGrid.count-7 .forecastText{font-size:17px!important;line-height:1.05!important}
+.daysGrid.count-6 .metricBlock,
+.daysGrid.count-7 .metricBlock{padding:11px 8px!important;gap:6px!important}
+.daysGrid.count-6 .metricPair,
+.daysGrid.count-7 .metricPair{grid-template-columns:48px minmax(0,1fr)!important;min-height:25px!important;font-size:17px!important;gap:6px!important}
+.daysGrid.count-6 .metricPair span,
+.daysGrid.count-7 .metricPair span{font-size:11px!important}
+.daysGrid.count-6 .metricPair b,
+.daysGrid.count-7 .metricPair b{font-size:17px!important}
+
+/* 8-10 days: use the empty middle area for readable data, not blank space. */
+.daysGrid.count-8 .dayCard,
+.daysGrid.count-9 .dayCard,
+.daysGrid.count-10 .dayCard{
+  grid-template-rows:46px 61px auto minmax(160px,.58fr) minmax(245px,1fr) auto!important;
+}
+.daysGrid.count-8 .iconBlock,
+.daysGrid.count-9 .iconBlock,
+.daysGrid.count-10 .iconBlock{padding:24px 5px 5px!important}
+.daysGrid.count-8 .weatherIcon,
+.daysGrid.count-9 .weatherIcon,
+.daysGrid.count-10 .weatherIcon{font-size:54px!important;margin-bottom:6px!important}
+.daysGrid.count-8 .forecastText,
+.daysGrid.count-9 .forecastText,
+.daysGrid.count-10 .forecastText{font-size:14px!important;line-height:1.03!important}
+.daysGrid.count-8 .metricBlock,
+.daysGrid.count-9 .metricBlock,
+.daysGrid.count-10 .metricBlock{padding:10px 7px!important;gap:5px!important;align-content:center!important}
+.daysGrid.count-8 .metricPair,
+.daysGrid.count-9 .metricPair,
+.daysGrid.count-10 .metricPair{grid-template-columns:41px minmax(0,1fr)!important;min-height:24px!important;font-size:15px!important;gap:5px!important;line-height:1.04!important}
+.daysGrid.count-8 .metricPair span,
+.daysGrid.count-9 .metricPair span,
+.daysGrid.count-10 .metricPair span{font-size:10.5px!important;letter-spacing:.03em!important}
+.daysGrid.count-8 .metricPair b,
+.daysGrid.count-9 .metricPair b,
+.daysGrid.count-10 .metricPair b{font-size:15px!important;line-height:1.04!important}
+
+/* Let fewer metric rows enlarge automatically. */
+.metricBlock.metrics-1 .metricPair,.metricBlock.metrics-2 .metricPair,.metricBlock.metrics-3 .metricPair{min-height:36px!important}
+.metricBlock.metrics-1 .metricPair b,.metricBlock.metrics-2 .metricPair b,.metricBlock.metrics-3 .metricPair b{font-size:1.12em!important}
+.daysGrid.count-8 .metricBlock.metrics-1 .metricPair,
+.daysGrid.count-8 .metricBlock.metrics-2 .metricPair,
+.daysGrid.count-8 .metricBlock.metrics-3 .metricPair,
+.daysGrid.count-9 .metricBlock.metrics-1 .metricPair,
+.daysGrid.count-9 .metricBlock.metrics-2 .metricPair,
+.daysGrid.count-9 .metricBlock.metrics-3 .metricPair,
+.daysGrid.count-10 .metricBlock.metrics-1 .metricPair,
+.daysGrid.count-10 .metricBlock.metrics-2 .metricPair,
+.daysGrid.count-10 .metricBlock.metrics-3 .metricPair{min-height:31px!important}
+
+/* Long wording auto-fits by shrinking the icon before shrinking text. */
+.daysGrid.count-8 .dayCard.longForecast .weatherIcon,
+.daysGrid.count-9 .dayCard.longForecast .weatherIcon,
+.daysGrid.count-10 .dayCard.longForecast .weatherIcon{font-size:45px!important;margin-bottom:4px!important}
+.daysGrid.count-8 .dayCard.longForecast .forecastText,
+.daysGrid.count-9 .dayCard.longForecast .forecastText,
+.daysGrid.count-10 .dayCard.longForecast .forecastText{font-size:12.8px!important;line-height:1.01!important}
+.daysGrid.count-8 .dayCard.veryLongForecast .weatherIcon,
+.daysGrid.count-9 .dayCard.veryLongForecast .weatherIcon,
+.daysGrid.count-10 .dayCard.veryLongForecast .weatherIcon{font-size:38px!important;margin-bottom:3px!important}
+.daysGrid.count-8 .dayCard.veryLongForecast .forecastText,
+.daysGrid.count-9 .dayCard.veryLongForecast .forecastText,
+.daysGrid.count-10 .dayCard.veryLongForecast .forecastText{font-size:11.8px!important;line-height:1!important}
+
+/* If bottom data or the bottom strip is hidden, reassign the freed room back to the icon/text area. */
+.dayCard.noMetrics:not(.noTag){grid-template-rows:var(--card-rows-no-metrics, 60px 80px auto minmax(0,1fr) auto)!important}
+.dayCard.noTag:not(.noMetrics){grid-template-rows:var(--card-rows-no-tag, 60px 80px auto minmax(0,.72fr) minmax(245px,1fr))!important}
+.dayCard.noMetrics.noTag{grid-template-rows:var(--card-rows-simple, 60px 80px auto minmax(0,1fr))!important}
+.daysGrid.count-8,.daysGrid.count-9,.daysGrid.count-10{--card-rows-no-metrics:46px 61px auto minmax(0,1fr) auto;--card-rows-no-tag:46px 61px auto minmax(165px,.58fr) minmax(285px,1fr);--card-rows-simple:46px 61px auto minmax(0,1fr)}
+.daysGrid.count-6,.daysGrid.count-7{--card-rows-no-metrics:54px 72px auto minmax(0,1fr) auto;--card-rows-no-tag:54px 72px auto minmax(190px,.65fr) minmax(255px,1fr);--card-rows-simple:54px 72px auto minmax(0,1fr)}
+.daysGrid.count-4,.daysGrid.count-5{--card-rows-no-metrics:60px 80px auto minmax(0,1fr) auto;--card-rows-no-tag:60px 80px auto minmax(215px,.72fr) minmax(250px,1fr);--card-rows-simple:60px 80px auto minmax(0,1fr)}
+.daysGrid.count-1,.daysGrid.count-2,.daysGrid.count-3{--card-rows-no-metrics:76px 112px auto minmax(0,1fr) auto;--card-rows-no-tag:76px 112px auto minmax(245px,.72fr) minmax(270px,1fr);--card-rows-simple:76px 112px auto minmax(0,1fr)}
+
+/* 2026-07-06 export header fix: do not clip the broadcast title in the PNG render. */
+.titleBlock{min-width:0;overflow:visible!important;padding-top:4px;padding-bottom:2px}
+.slideTitleOut{
+  line-height:1.08!important;
+  overflow:visible!important;
+  text-overflow:clip!important;
+  padding-top:6px;
+  padding-bottom:2px;
+}
+.slideHeader{overflow:visible!important}
+.brandLockup,.issueBlock{overflow:visible!important}
+
+/* Keep the export clone at exact slide dimensions and prevent any editor viewport clipping. */
+.exportClone{
+  position:fixed!important;
+  left:0!important;
+  top:0!important;
+  width:1920px!important;
+  height:1080px!important;
+  transform:none!important;
+  margin:0!important;
+  overflow:hidden!important;
+  z-index:40!important;
+  pointer-events:none!important;
+}
+
+/* V10 export fidelity: match the preview and the downloaded PNG more closely. */
+.slideCanvas,
+.slideCanvas *{
+  -webkit-font-smoothing:antialiased;
+  text-rendering:geometricPrecision;
+}
+/* html2canvas handles radial gradients more consistently than blurred filtered circles. */
+.glow{display:none!important}
+.bg-rbrtw{
+  background:
+    radial-gradient(ellipse at 7% 18%, rgba(11,85,255,.70) 0%, rgba(11,85,255,.44) 22%, rgba(11,85,255,.18) 38%, transparent 54%),
+    radial-gradient(ellipse at 93% 86%, rgba(182,36,255,.62) 0%, rgba(182,36,255,.34) 28%, rgba(182,36,255,.13) 45%, transparent 62%),
+    linear-gradient(135deg,#061020 0%,#0b1d3b 44%,#230d45 100%)!important;
+}
+.bg-severe{
+  background:
+    radial-gradient(ellipse at 14% 18%, rgba(255,190,36,.38) 0%, rgba(255,120,0,.22) 36%, transparent 57%),
+    radial-gradient(ellipse at 90% 88%, rgba(255,42,70,.30) 0%, transparent 58%),
+    linear-gradient(135deg,#080b10 0%,#3a1c00 47%,#4b0711 100%)!important;
+}
+.bg-heat{
+  background:
+    radial-gradient(ellipse at 14% 15%, rgba(255,122,0,.52) 0%, rgba(255,122,0,.24) 38%, transparent 58%),
+    radial-gradient(ellipse at 90% 88%, rgba(255,0,122,.32) 0%, transparent 58%),
+    linear-gradient(135deg,#170707 0%,#532100 48%,#8c113d 100%)!important;
+}
+.bg-rain{
+  background:
+    radial-gradient(ellipse at 12% 16%, rgba(0,90,255,.48) 0%, rgba(0,90,255,.18) 42%, transparent 60%),
+    radial-gradient(ellipse at 90% 86%, rgba(0,255,210,.22) 0%, transparent 58%),
+    linear-gradient(135deg,#04101c 0%,#07365c 52%,#083f3f 100%)!important;
+}
+.bg-winter{
+  background:
+    radial-gradient(ellipse at 13% 15%, rgba(140,229,255,.55) 0%, rgba(140,229,255,.22) 38%, transparent 58%),
+    radial-gradient(ellipse at 90% 88%, rgba(124,44,255,.26) 0%, transparent 58%),
+    linear-gradient(135deg,#07111f 0%,#143f68 50%,#41206d 100%)!important;
+}
+.exportMount{
+  position:fixed!important;
+  left:0!important;
+  top:0!important;
+  width:1920px!important;
+  height:1080px!important;
+  overflow:hidden!important;
+  margin:0!important;
+  padding:0!important;
+  z-index:40!important;
+  pointer-events:none!important;
+  background:#07101f!important;
+  contain:strict!important;
+}
+.exportMount .exportClone{
+  position:absolute!important;
+  left:0!important;
+  top:0!important;
+  width:1920px!important;
+  height:1080px!important;
+  transform:none!important;
+  margin:0!important;
+  overflow:hidden!important;
+  box-shadow:none!important;
+}
+
+/* Product / map slide mode */
+.hiddenProduct{display:none!important}
+.productCanvas{position:relative;z-index:2;flex:1;min-height:0;padding:26px 34px 18px 34px;display:grid;grid-template-columns:1.08fr .92fr;gap:24px;overflow:hidden}
+.slideCanvas.product-mode #slideBody{display:none!important}
+.slideCanvas.product-mode .productCanvas{display:grid!important}
+.productCanvas.fullMap{grid-template-columns:1fr}
+.productMap{position:relative;border:4px solid rgba(255,255,255,.82);background:#2c352d;overflow:hidden;box-shadow:inset 0 0 0 3px rgba(0,0,0,.35),0 14px 30px rgba(0,0,0,.35);min-height:0}
+.productMap:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 18% 25%,rgba(255,255,255,.18),transparent 22%),radial-gradient(circle at 72% 66%,rgba(0,0,0,.28),transparent 32%),linear-gradient(135deg,rgba(138,100,48,.5),rgba(25,92,55,.55) 42%,rgba(42,95,122,.55));opacity:.96}
+.productMap.tempMap:before{background:radial-gradient(circle at 30% 18%,#a4ce45,transparent 20%),radial-gradient(circle at 62% 48%,#e23f2d,transparent 30%),linear-gradient(135deg,#3d852e,#dfbc37 26%,#e55d37 58%,#8f3169)}
+.productMap.dewMap:before{background:radial-gradient(circle at 22% 28%,#3c8ed9,transparent 25%),radial-gradient(circle at 72% 65%,#69d275,transparent 28%),linear-gradient(135deg,#1a4279,#277aa5 38%,#27a35f 70%,#f1c54b)}
+.productMap.heatMap:before{background:radial-gradient(circle at 60% 54%,#ffeb44,transparent 20%),radial-gradient(circle at 78% 70%,#ff3023,transparent 28%),linear-gradient(135deg,#e78a2f,#f0cf3b 22%,#fb6b32 57%,#b21955)}
+.productMap.radarMap:before{background:radial-gradient(circle at 28% 18%,rgba(255,255,255,.6),transparent 16%),radial-gradient(circle at 72% 30%,rgba(255,255,255,.3),transparent 20%),linear-gradient(135deg,#1c345c,#0d5b75 42%,#24304f)}
+.productMap.severeMap:before{background:linear-gradient(90deg,rgba(98,184,92,.85) 0 34%,rgba(236,234,108,.75) 34% 51%,rgba(236,155,50,.6) 51% 64%,rgba(114,150,85,.45) 64% 100%),radial-gradient(circle at 52% 55%,rgba(255,255,255,.22),transparent 26%)}
+.mapRoads{position:absolute;inset:0;background:repeating-linear-gradient(27deg,transparent 0 58px,rgba(0,0,0,.35) 59px 61px,transparent 62px 150px),repeating-linear-gradient(112deg,transparent 0 94px,rgba(0,0,0,.35) 95px 98px,transparent 99px 210px);opacity:.45}
+.cityPoint{position:absolute;transform:translate(-50%,-50%);color:white;text-shadow:0 3px 3px #000,0 0 4px #000;font-weight:1000;text-align:center;line-height:.95;z-index:4}
+.cityPoint .tempValue{font-size:54px;display:block;letter-spacing:-1px}.cityPoint .cityName{font-size:20px;display:block}.cityPoint.small .tempValue{font-size:38px}.cityPoint.small .cityName{font-size:15px}
+.frontLine{position:absolute;height:10px;background:#0b35ff;box-shadow:0 0 0 4px rgba(0,0,0,.55);border-radius:8px;z-index:5;transform-origin:left center}.frontLine:after{content:"";position:absolute;left:10px;right:10px;top:8px;height:28px;background:repeating-linear-gradient(90deg,#0b35ff 0 22px,transparent 22px 45px);clip-path:polygon(0 0,100% 0,88% 100%,0 100%);opacity:.95}
+.productPanel{position:relative;background:rgba(4,13,29,.82);border:4px solid rgba(255,255,255,.72);box-shadow:inset 0 0 0 3px rgba(0,0,0,.38),0 12px 28px rgba(0,0,0,.35);padding:26px;overflow:hidden;min-height:0}
+.productPanel:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 80% 20%,rgba(104,0,255,.24),transparent 34%),linear-gradient(180deg,rgba(255,255,255,.08),transparent 32%);pointer-events:none}
+.productPanel>*{position:relative;z-index:2}.productKicker{font-size:32px;font-weight:1000;color:#a2e8ff;text-transform:uppercase;margin-bottom:16px;letter-spacing:.02em}.productBigNumber{font-size:180px;line-height:.88;font-weight:1000;color:#fff200;text-shadow:0 8px 10px #000}.productCategory{font-size:58px;font-weight:1000;color:white;text-shadow:0 4px 6px #000}.productSummary{font-size:28px;line-height:1.12;font-weight:900;color:white;margin-top:18px}.hazardBars{display:grid;gap:26px;margin-top:30px}.hazardBarRow{display:grid;grid-template-columns:210px 1fr;gap:18px;align-items:center}.hazardLabel{background:rgba(4,8,22,.96);border-left:10px solid #fff;padding:12px 16px;color:#fff;font-size:30px;font-weight:1000;line-height:1}.hazardLabel small{display:block;color:#fff06b;font-size:20px;margin-top:8px}.riskTrack{position:relative;height:62px;background:#0e0b5a;border:3px solid #211b92;box-shadow:inset 0 0 18px rgba(0,0,0,.4)}.riskFill{height:100%;background:linear-gradient(90deg,#fff329,#ffbc1c,#ff321f);box-shadow:0 0 16px rgba(255,240,0,.35)}.riskScale{display:grid;grid-template-columns:repeat(3,1fr);font-size:25px;font-weight:1000;color:white;margin-left:228px;margin-bottom:-16px;text-shadow:0 3px 4px #000}.riskLegend{position:absolute;left:42px;bottom:42px;z-index:6;width:220px;border:3px solid #0b0b5e;background:#081445;color:#000;font-weight:1000;text-align:center;box-shadow:0 8px 14px rgba(0,0,0,.5)}.riskLegend div{padding:10px;font-size:22px}.riskLegend .non{background:#bdcfc7}.riskLegend .marg{background:#68c66b}.riskLegend .slgt{background:#f4e85a}.riskLegend .enh{background:#f59a33}.riskLegend .mod{background:#e85a65}.riskLegend .high{background:#d75bc5}.rainChart{display:grid;grid-template-columns:230px 1fr 180px;height:100%;background:rgba(0,0,0,.28);border:4px solid rgba(255,255,255,.6)}.rainBands{display:grid;grid-template-rows:repeat(5,1fr)}.rainBands div{display:flex;align-items:center;padding-left:24px;color:white;text-shadow:0 3px 4px #000;font-size:33px;font-weight:1000;border-bottom:2px solid rgba(255,255,255,.18)}.rainBands div:nth-child(1){background:#06470d}.rainBands div:nth-child(2){background:#0b6e10}.rainBands div:nth-child(3){background:#07920e}.rainBands div:nth-child(4){background:#10bc1a}.rainBands div:nth-child(5){background:#10ed1c}.rainBars{position:relative;display:flex;align-items:flex-end;justify-content:space-around;padding:0 20px 0 20px;background:linear-gradient(180deg,rgba(0,0,0,.12),rgba(0,0,0,.3))}.rainColumn{width:70px;background:#ffffa3;border:2px solid rgba(255,255,255,.8);position:relative;box-shadow:0 0 10px rgba(255,255,255,.35)}.rainColumn b{position:absolute;top:-40px;left:50%;transform:translateX(-50%);font-size:32px;color:white;text-shadow:0 4px 4px #000}.rainColumn span{position:absolute;bottom:-58px;left:50%;transform:translateX(-50%);font-size:24px;color:white;text-shadow:0 3px 4px #000;text-align:center;line-height:1}.rainScale{display:grid;grid-template-rows:repeat(5,1fr)}.rainScale div{display:flex;align-items:center;justify-content:center;color:white;text-shadow:0 3px 4px #000;font-size:32px;font-weight:1000;border-bottom:2px solid rgba(255,255,255,.2);background:rgba(0,0,0,.25)}.aqiScale{position:absolute;left:34px;top:112px;width:250px;display:grid;gap:10px;z-index:5}.aqiScale div{height:70px;display:flex;align-items:center;justify-content:center;font-weight:1000;font-size:22px;color:#111}.aqiGood{background:#20df35}.aqiModerate{background:#f2ee24}.aqiUsG{background:#f79621}.aqiUnhealthy{background:#ed2224;color:white!important}.aqiVery{background:#8f3d8d;color:white!important}.aqiHaz{background:#871734;color:white!important}.aqiBox{position:absolute;left:340px;right:70px;top:130px;bottom:80px;background:rgba(193,221,250,.38);border:5px solid rgba(210,235,255,.56);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}.aqiBox .productBigNumber{font-size:220px}.mapProductFooter{position:absolute;left:34px;right:34px;bottom:18px;font-size:18px;font-weight:900;color:#d7e7ff;text-shadow:0 2px 4px #000}.sourceNote{font-size:20px;color:#c7ddff;margin-top:18px;font-weight:900}.radarBlob{position:absolute;border-radius:50%;filter:blur(2px);opacity:.85;z-index:3}.radarGreen{background:#38e04b}.radarYellow{background:#f4e63c}.radarRed{background:#ef3e30}.cloudPatch{position:absolute;border-radius:50%;background:rgba(255,255,255,.64);filter:blur(8px);z-index:2}.productNoData{font-size:36px;font-weight:1000;color:white;text-align:center;align-self:center;justify-self:center;text-shadow:0 4px 6px #000}.productEditorGrid{display:grid;gap:12px}.productEditorGrid textarea{min-height:90px}.smallStatus{font-size:12px;line-height:1.25;padding:8px;margin-top:10px}.productSetupPanel .fullBtn{width:100%;margin-top:8px}.mapBadge{position:absolute;z-index:7;background:rgba(0,0,0,.78);color:white;border:3px solid rgba(255,255,255,.5);padding:12px 16px;font-size:26px;font-weight:1000;text-shadow:0 2px 4px #000}
+.noaaMapImage{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1;filter:saturate(1.18) contrast(1.04) brightness(.95)}
+.productMap .noaaMapImage~.cityPoint,.productMap .noaaMapImage~.mapBadge,.productMap .noaaMapImage~.riskLegend,.productMap .noaaMapImage~.mapProductFooter,.productMap .noaaMapImage~.radarBlob,.productMap .noaaMapImage~.cloudPatch{z-index:5}
+
+/* V9 product-mode fix: map products use the same locked 1920x1080 frame and fill the available slide area. */
+.slideCanvas.product-mode .slideBody{display:none!important}
+.slideCanvas.product-mode .productCanvas{
+  position:absolute!important;
+  left:0!important;
+  right:0!important;
+  top:126px!important;
+  bottom:50px!important;
+  height:auto!important;
+  min-height:0!important;
+  padding:24px 34px 20px 34px!important;
+  display:grid!important;
+  z-index:2!important;
+}
+.slideCanvas.product-mode .productCanvas.fullMap{grid-template-columns:1fr!important;gap:0!important}
+.slideCanvas.product-mode .productCanvas.splitProduct{grid-template-columns:1.05fr .95fr!important;gap:24px!important}
+.slideCanvas.product-mode .productCanvas.panelOnly{grid-template-columns:1fr!important;gap:0!important}
+.productCanvas.hiddenProduct{display:none!important}
+.productMap,.productPanel{height:100%;min-height:0!important}
+.productMap{border-radius:0;background:#1e2e38!important}
+.productMap:before{z-index:0}
+.productMap>*{position:relative;z-index:2}
+.productMap .mapRoads{z-index:2}
+.productMap .noaaMapImage,.productMap .noaaOverlayImage{
+  position:absolute!important;inset:0!important;width:100%!important;height:100%!important;object-fit:cover!important;display:block!important;
+  opacity:.76;z-index:1!important;filter:saturate(1.25) contrast(1.08) brightness(.9);
+}
+.productMap .noaaOverlayImage{opacity:.65;mix-blend-mode:screen;filter:saturate(1.45) contrast(1.18) brightness(1.08)}
+.productMap .mapTexture{position:absolute;inset:0;z-index:1;background:
+  linear-gradient(100deg,rgba(255,255,255,.08),transparent 24%,rgba(0,0,0,.2) 65%,transparent),
+  repeating-linear-gradient(18deg,rgba(255,255,255,.07) 0 1px,transparent 1px 34px);
+  pointer-events:none;opacity:.55}
+.productMap .countyGrid{position:absolute;inset:0;z-index:3;background:
+  repeating-linear-gradient(90deg,transparent 0 160px,rgba(0,0,0,.48) 162px 166px,transparent 168px 320px),
+  repeating-linear-gradient(0deg,transparent 0 125px,rgba(0,0,0,.45) 126px 130px,transparent 132px 250px);
+  opacity:.7;mix-blend-mode:multiply}
+.productMap .roadGrid{position:absolute;inset:0;z-index:3;background:
+  repeating-linear-gradient(28deg,transparent 0 250px,rgba(120,20,20,.55) 252px 257px,transparent 259px 470px),
+  repeating-linear-gradient(112deg,transparent 0 295px,rgba(30,30,30,.55) 296px 300px,transparent 302px 520px);
+  opacity:.5}
+.productMap .basemapLabel{position:absolute;z-index:6;color:#fff;font-size:31px;font-weight:1000;text-shadow:0 4px 5px #000,0 0 4px #000;letter-spacing:-.02em}
+.productMap .mapLegendBox{position:absolute;left:28px;top:28px;z-index:7;background:rgba(3,8,17,.82);border:4px solid rgba(255,255,255,.65);box-shadow:0 10px 22px rgba(0,0,0,.45);font-weight:1000;text-align:center;color:white}
+.mapLegendBox .legendRow{display:grid;grid-template-columns:1fr;min-width:170px;padding:8px 14px;font-size:24px;line-height:1.02;border-bottom:3px solid rgba(0,0,0,.35);text-shadow:0 3px 4px #000}.mapLegendBox .legendRow:last-child{border-bottom:0}
+.mapLegendBox .legendLow{background:#58c6f2}.mapLegendBox .legendMid{background:#53e981;color:#04120a}.mapLegendBox .legendHigh{background:#0b7138}.mapLegendBox .legendHot{background:#fb2c8b}.mapLegendBox .legendExtreme{background:#7e1742}.mapLegendBox .legendDry{background:#c5f2df;color:#14211c}.mapLegendBox .legendVeryDry{background:#e7f6c7;color:#14211c}.mapLegendBox .legendAirGood{background:#21df36;color:#102210}.mapLegendBox .legendAirMod{background:#fff22b;color:#171200}.mapLegendBox .legendAirBad{background:#f79822;color:#171200}.mapLegendBox .legendRain1{background:#06490d}.mapLegendBox .legendRain2{background:#0b7a12}.mapLegendBox .legendRain3{background:#12a919}.mapLegendBox .legendRain4{background:#13dd20;color:#08200b}.mapLegendBox .legendRain5{background:#aafbab;color:#09280c}
+.cityPoint{z-index:8!important}.cityPoint .tempValue{font-size:68px!important}.cityPoint .cityName{font-size:25px!important}.cityPoint.small .tempValue{font-size:50px!important}.cityPoint.small .cityName{font-size:19px!important}
+.productMapFooter,.mapProductFooter{z-index:9!important;background:rgba(0,0,0,.5);border-left:6px solid #8de7ff;padding:10px 14px;border-radius:0 10px 10px 0;color:#eaf5ff!important}
+.frontLine{z-index:9!important}
+.productHeaderStyle{position:absolute;left:0;right:0;top:0;height:0}
+.productPanel{border-radius:0}
+.hazardBars{gap:22px!important}.hazardLabel{font-size:31px!important}.riskTrack{height:64px!important}
+.productDataNote{position:absolute;right:26px;bottom:20px;z-index:12;background:rgba(0,0,0,.62);border:2px solid rgba(255,255,255,.4);padding:8px 12px;border-radius:8px;color:#d8ebff;font-size:16px;font-weight:1000;max-width:760px;text-align:right}
+.productMap .imageStatus{position:absolute;right:24px;top:24px;z-index:12;background:rgba(0,0,0,.7);border:2px solid rgba(255,255,255,.45);border-radius:10px;padding:8px 12px;font-size:16px;font-weight:1000;color:#e4f2ff;max-width:540px;text-align:right}
+.productMap .imageStatus.ok{color:#c9ffdc}.productMap .imageStatus.fallback{color:#ffe0a0}
+.rainChart{height:100%!important}.rainColumn{min-height:18px}.rainColumn span{bottom:-66px!important}
+.aqiBox{z-index:5!important}.aqiScale{z-index:6!important}.aqiBox .productSummary{font-size:25px!important;max-width:900px}
+
+/* V10 product alignment + real map/data product fixes */
+.slideCanvas.product-mode .slideHeader{height:120px!important;min-height:120px!important;overflow:visible!important}
+.slideCanvas.product-mode .productCanvas{
+  position:absolute!important;
+  left:0!important;
+  right:0!important;
+  top:120px!important;
+  bottom:44px!important;
+  height:auto!important;
+  min-height:0!important;
+  padding:18px 26px 14px 26px!important;
+  display:grid!important;
+  z-index:2!important;
+  overflow:hidden!important;
+}
+.slideCanvas.product-mode .productCanvas.fullMap{grid-template-columns:1fr!important;gap:0!important}
+.slideCanvas.product-mode .productCanvas.splitProduct{grid-template-columns:1.08fr .92fr!important;gap:22px!important}
+.slideCanvas.product-mode .productCanvas.panelOnly{grid-template-columns:1fr!important;gap:0!important}
+.productCanvas.product-rain-chances,.productCanvas.product-air-quality{padding:36px 56px 28px 56px!important}
+.productMap,.productPanel{height:100%!important;min-height:0!important;position:relative!important;overflow:hidden!important;border-radius:0!important}
+.productMap{background:#1e2e38!important;border:4px solid rgba(255,255,255,.82)!important;box-shadow:inset 0 0 0 3px rgba(0,0,0,.45),0 14px 30px rgba(0,0,0,.35)!important}
+.productMap:before{z-index:0!important;opacity:.96!important}
+.mapBaseImage,.mapBaseFallback,.dataField,.noaaOverlayImage,.mapTexture,.countyGrid,.roadGrid{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;display:block!important;pointer-events:none!important}
+.mapBaseImage{object-fit:cover!important;z-index:1!important;filter:saturate(1.08) contrast(1.06) brightness(.78)!important}
+.mapBaseFallback{z-index:1!important;background:radial-gradient(circle at 18% 20%,rgba(236,199,117,.65),transparent 25%),radial-gradient(circle at 80% 65%,rgba(18,90,116,.75),transparent 30%),linear-gradient(130deg,#6e6243,#55814e 40%,#2d6f79 74%,#1d405f)!important}
+.dataField{z-index:2!important;mix-blend-mode:multiply;opacity:.72!important}
+.tempField{background:radial-gradient(circle at 14% 16%,#8ed45c 0 12%,transparent 25%),radial-gradient(circle at 42% 48%,#f3dd45 0 16%,transparent 33%),radial-gradient(circle at 68% 60%,#f25a2f 0 20%,transparent 38%),linear-gradient(110deg,rgba(58,186,73,.75),rgba(242,207,54,.72),rgba(232,61,47,.76),rgba(157,51,109,.72))!important}
+.dewField{background:radial-gradient(circle at 20% 38%,#50b7f2 0 18%,transparent 34%),radial-gradient(circle at 67% 58%,#45d27c 0 26%,transparent 42%),linear-gradient(120deg,rgba(47,122,196,.75),rgba(37,181,130,.75),rgba(87,205,103,.68))!important}
+.heatField{background:radial-gradient(circle at 52% 56%,#fff6a0 0 15%,transparent 31%),radial-gradient(circle at 72% 64%,#ff332b 0 17%,transparent 36%),linear-gradient(125deg,rgba(236,116,46,.75),rgba(245,87,154,.78),rgba(130,45,120,.72))!important}
+.severeField{background:linear-gradient(90deg,rgba(84,188,90,.78) 0 38%,rgba(239,233,87,.74) 38% 58%,rgba(237,145,47,.62) 58% 72%,rgba(189,65,90,.52) 72% 100%)!important;mix-blend-mode:normal;opacity:.58!important}
+.radarField{background:linear-gradient(120deg,rgba(20,35,60,.15),rgba(20,80,95,.18))!important;opacity:.3!important}
+.noaaOverlayImage{object-fit:cover!important;z-index:4!important;opacity:.76!important;filter:saturate(1.35) contrast(1.1) brightness(1.02)!important;mix-blend-mode:screen!important}
+.mapTexture{z-index:5!important;opacity:.35!important;background:linear-gradient(100deg,rgba(255,255,255,.08),transparent 24%,rgba(0,0,0,.22) 65%,transparent),repeating-linear-gradient(18deg,rgba(255,255,255,.08) 0 1px,transparent 1px 34px)!important}
+.countyGrid{z-index:6!important;opacity:.55!important;background:repeating-linear-gradient(90deg,transparent 0 160px,rgba(0,0,0,.62) 162px 166px,transparent 168px 320px),repeating-linear-gradient(0deg,transparent 0 125px,rgba(0,0,0,.58) 126px 130px,transparent 132px 250px)!important;mix-blend-mode:multiply}
+.roadGrid{z-index:7!important;opacity:.42!important;background:repeating-linear-gradient(28deg,transparent 0 250px,rgba(135,35,25,.66) 252px 257px,transparent 259px 470px),repeating-linear-gradient(112deg,transparent 0 295px,rgba(30,30,30,.62) 296px 300px,transparent 302px 520px)!important}
+.productMap>*:not(.mapBaseImage):not(.mapBaseFallback):not(.dataField):not(.noaaOverlayImage):not(.mapTexture):not(.countyGrid):not(.roadGrid){position:relative;z-index:8}
+.cityPoint{position:absolute!important;transform:translate(-50%,-50%)!important;display:flex!important;flex-direction:column!important;align-items:center!important;z-index:12!important;text-align:center!important;white-space:nowrap!important;text-shadow:0 4px 5px #000,0 0 4px #000!important}
+.cityPoint .tempValue{font-size:76px!important;line-height:.82!important;color:#fff!important;font-weight:1000!important;-webkit-text-stroke:2px rgba(0,0,0,.65);letter-spacing:-.04em!important}
+.cityPoint .cityName{font-size:26px!important;line-height:1!important;color:#fff!important;font-weight:1000!important}
+.cityPoint.small .tempValue{font-size:56px!important}.cityPoint.small .cityName{font-size:21px!important}
+.mapLegendBox{position:absolute!important;left:28px!important;top:28px!important;z-index:13!important;background:rgba(3,8,17,.84)!important;border:4px solid #164a9a!important;box-shadow:0 10px 22px rgba(0,0,0,.55)!important;font-weight:1000!important;text-align:center!important;color:white!important}
+.mapLegendBox .legendRow{display:grid!important;grid-template-columns:1fr!important;min-width:190px!important;padding:8px 16px!important;font-size:25px!important;line-height:1.02!important;border-bottom:3px solid rgba(0,0,0,.35)!important;text-shadow:0 3px 4px #000!important}.mapLegendBox .legendRow:last-child{border-bottom:0!important}
+.radarLegend{position:absolute;left:470px;top:24px;width:600px;height:34px;display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:12px;color:#fff;font-size:22px;font-weight:1000;text-shadow:0 3px 4px #000;z-index:15}.radarLegend div{height:22px;background:linear-gradient(90deg,#2ecb47,#f2e43b,#f48a2a,#e51d26,#db46c1)}
+.frontLine{position:absolute!important;height:18px!important;background:#123bff!important;border:4px solid #0821a8!important;border-radius:22px!important;z-index:16!important;box-shadow:0 4px 8px rgba(0,0,0,.5)!important}.frontLine:after{content:"";position:absolute;left:0;right:0;top:13px;height:26px;background:repeating-linear-gradient(90deg,#123bff 0 26px,transparent 26px 54px);clip-path:polygon(0 0,100% 0,50% 100%);opacity:.95}
+.imageStatus{position:absolute!important;right:22px!important;top:18px!important;z-index:20!important;background:rgba(0,0,0,.68)!important;border:2px solid rgba(255,255,255,.45)!important;border-radius:10px!important;padding:8px 12px!important;font-size:16px!important;font-weight:1000!important;color:#e4f2ff!important;max-width:640px!important;text-align:right!important}.imageStatus.ok{color:#caffdc!important}.imageStatus.fallback{color:#ffe0a0!important}
+.mapProductFooter{position:absolute!important;left:28px!important;right:28px!important;bottom:18px!important;z-index:20!important;background:rgba(0,0,0,.58)!important;border-left:6px solid #8de7ff!important;padding:10px 14px!important;border-radius:0 10px 10px 0!important;color:#eaf5ff!important;font-size:19px!important;font-weight:1000!important;text-shadow:0 2px 4px #000!important}
+.riskLegend{z-index:14!important}.riskLegend.spcTopLegend{position:absolute!important;left:280px!important;top:34px!important;bottom:auto!important;width:840px!important;display:grid!important;grid-template-columns:repeat(5,1fr)!important;border:4px solid rgba(0,0,0,.72)!important}.riskLegend.spcTopLegend div{font-size:26px!important;padding:12px!important}.bigRiskBadge{font-size:140px!important;line-height:.85!important;background:rgba(0,0,0,.72)!important;box-shadow:0 0 26px rgba(0,0,0,.75)!important;border:0!important;padding:10px 42px!important}
+.hazardIndexPanel{padding:34px 36px!important}.hazardIndexPanel .riskScale{margin-left:220px!important;margin-bottom:0!important;font-size:28px!important}.hazardBars{gap:28px!important}.hazardBarRow{grid-template-columns:250px 1fr!important;gap:22px!important}.hazardLabel{font-size:34px!important}.hazardLabel small{font-size:22px!important}.riskTrack{height:72px!important}.productSummary{font-size:29px!important;line-height:1.08!important}.sourceNote{font-size:20px!important}
+.rainPanel{padding:0!important;background:linear-gradient(135deg,rgba(0,0,0,.26),rgba(0,0,0,.42)),radial-gradient(circle at 55% 82%,rgba(255,50,30,.35),transparent 32%)!important}.rainChart{height:100%!important;grid-template-columns:320px 1fr 220px!important;border:4px solid rgba(255,255,255,.65)!important}.rainBands div{font-size:42px!important;padding-left:28px!important}.rainScale div{font-size:38px!important}.rainColumn{width:82px!important}.rainColumn b{font-size:38px!important;top:-50px!important}.rainColumn span{font-size:25px!important;bottom:-68px!important}
+.aqiPanel{background:linear-gradient(135deg,rgba(60,120,170,.32),rgba(4,12,28,.62)),radial-gradient(circle at 52% 56%,rgba(210,230,255,.4),transparent 36%)!important}.aqiBox{left:410px!important;right:90px!important;top:140px!important;bottom:88px!important}.aqiScale{left:86px!important;top:150px!important;width:280px!important;gap:12px!important}.aqiScale div{height:76px!important;font-size:23px!important}.aqiBox .productBigNumber{font-size:240px!important;color:#fff200!important;text-shadow:0 8px 10px #000!important}.aqiBox .productCategory{font-size:66px!important}.aqiTicker{display:grid;grid-template-columns:repeat(6,1fr);width:520px;height:66px;border:6px solid #22578a;background:linear-gradient(90deg,#20df35 0 16.66%,#f2ee24 16.66% 33.33%,#f79621 33.33% 50%,#ed2224 50% 66.66%,#8f3d8d 66.66% 83.33%,#871734 83.33% 100%);margin:8px 0 18px}.aqiTicker span{display:block;border:6px solid white;background:rgba(255,255,255,.28)}
+.radarBlob{z-index:11!important;filter:blur(2px)!important;opacity:.92!important}.cloudPatch{z-index:10!important;filter:blur(8px)!important;opacity:.72!important}
+.exportClone .mapBaseImage,.exportClone .noaaOverlayImage{filter:saturate(1.12) contrast(1.05) brightness(.92)!important}
