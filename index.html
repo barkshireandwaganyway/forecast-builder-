@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>RBRTW / EWX Auto Weather Studio</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="appShell">
+    <aside class="controlPanel leftPanel noExport">
+      <div class="studioMark">
+        <div class="logoBox">RBRTW</div>
+        <div>
+          <h1>EWX Auto Weather Studio</h1>
+          <p>Automated Brief + Broadcast Graphic Builder</p>
+        </div>
+      </div>
+
+      <div class="panelSection">
+        <div class="sectionTitle">Forecast Setup</div>
+        <label>Location label
+          <input id="locationLabel" value="RBRTW AREA" />
+        </label>
+        <div class="grid2">
+          <label>Latitude
+            <input id="lat" type="number" step="0.0001" value="29.4810" />
+          </label>
+          <label>Longitude
+            <input id="lon" type="number" step="0.0001" value="-98.7480" />
+          </label>
+        </div>
+        <div class="grid2">
+          <label>Start date
+            <input id="startDate" type="date" />
+          </label>
+          <label>Forecast length
+            <select id="dayCount"></select>
+          </label>
+        </div>
+        <label>Slide title
+          <input id="slideTitle" value="10 DAY FORECAST" />
+        </label>
+        <label>Subtitle
+          <input id="slideSubtitle" value="RBRTW AREA • NWS EWX DATA" />
+        </label>
+        <div class="buttonGrid">
+          <button id="loadNws" class="primaryBtn">Auto Fill NWS</button>
+          <button id="exportPng" class="primaryBtn">Export PNG</button>
+        </div>
+        <div class="buttonGrid three">
+          <button id="saveProject" class="secondaryBtn">Save JSON</button>
+          <label class="fileBtn">Load JSON<input id="loadProject" type="file" accept="application/json" /></label>
+          <button id="resetAutoLayout" class="secondaryBtn">Reflow</button>
+        </div>
+        <div id="dataStatus" class="statusBox">Ready. Forecast slide is locked to 1920×1080 landscape.</div>
+      </div>
+
+      <div class="panelSection productSetupPanel">
+        <div class="sectionTitle">Product Type</div>
+        <label>Visualization / slide type
+          <select id="productType">
+            <option value="forecast" selected>Forecast Day Builder</option>
+            <option value="storm-hazards">Storm Hazards Index</option>
+            <option value="temperatures">Temperatures Map</option>
+            <option value="rain-chances">Rain Chances Ahead</option>
+            <option value="severe-outlook">Severe Storm Outlook</option>
+            <option value="air-quality">Air Quality Index</option>
+            <option value="dewpoints">Future Dew Points</option>
+            <option value="heat-index">Heat Index Map</option>
+            <option value="clouds-radar">Clouds + Radar Snapshot</option>
+          </select>
+        </label>
+        <label>Product date
+          <select id="productDayOffset"></select>
+        </label>
+        <button id="autoProduct" class="primaryBtn fullBtn">Auto Fill Product</button>
+        <div class="statusBox smallStatus">Forecast mode keeps the day-card builder. Other modes create a separate broadcast slide using the selected date.</div>
+      </div>
+
+      <div class="panelSection">
+        <div class="sectionTitle">Slide Modules</div>
+        <label class="checkRow"><input id="showHeadline" type="checkbox" /> Show headline box</label>
+        <label>Main headline
+          <textarea id="moduleHeadline" rows="3"></textarea>
+        </label>
+        <label class="checkRow"><input id="showImpacts" type="checkbox" /> Show impacts box</label>
+        <label>Main impacts
+          <textarea id="moduleImpacts" rows="5"></textarea>
+        </label>
+        <label class="checkRow"><input id="showConfidence" type="checkbox" /> Show confidence box</label>
+        <label>Confidence
+          <select id="moduleConfidence">
+            <option></option>
+            <option>High</option>
+            <option selected>Medium</option>
+            <option>Low</option>
+            <option>Changing</option>
+          </select>
+        </label>
+        <label class="checkRow"><input id="showRisk" type="checkbox" /> Show alerts / risk box</label>
+        <label>Alerts / Risk line
+          <textarea id="moduleRisk" rows="3"></textarea>
+        </label>
+        <label class="checkRow"><input id="showTiming" type="checkbox" /> Show rain / storm timing box</label>
+        <label>Rain / storm timing
+          <textarea id="moduleTiming" rows="3"></textarea>
+        </label>
+        <label class="checkRow"><input id="showOutdoor" type="checkbox" /> Show outdoor impact box</label>
+        <label>Outdoor / community impact
+          <textarea id="moduleOutdoor" rows="3"></textarea>
+        </label>
+        <label class="checkRow"><input id="showNotes" type="checkbox" /> Show notes / holiday box</label>
+        <label>Notes / holiday line
+          <textarea id="moduleNotes" rows="3"></textarea>
+        </label>
+      </div>
+    </aside>
+
+    <main class="stageColumn noExportScroll">
+      <div class="stageTopbar noExport">
+        <div class="topPill">Landscape canvas: 1920×1080</div>
+        <div class="topPill">Export captures slide only</div>
+        <div class="topPill">Every field editable after auto-fill</div>
+      </div>
+      <div id="stageViewport" class="stageViewport">
+        <div id="slideFrame" class="slideFrame">
+          <section id="slideCanvas" class="slideCanvas bg-rbrtw" aria-label="RBRTW broadcast forecast slide">
+            <div class="backgroundTexture"></div>
+            <div class="glow glowBlue"></div>
+            <div class="glow glowPink"></div>
+
+            <header class="slideHeader">
+              <div class="brandLockup">
+                <div id="brandText" class="brandText">RBRTW</div>
+                <div class="brandSub">AUTO WEATHER STUDIO</div>
+              </div>
+              <div class="titleBlock">
+                <div id="slideTitleOut" class="slideTitleOut">10 DAY FORECAST</div>
+                <div id="slideSubtitleOut" class="slideSubtitleOut">RBRTW AREA • NWS EWX DATA</div>
+              </div>
+              <div class="issueBlock">
+                <div id="issueLocation">RBRTW AREA</div>
+                <span id="issueTime">NOT LOADED</span>
+              </div>
+            </header>
+
+            <div id="slideBody" class="slideBody">
+              <aside id="intelPanel" class="intelPanel hiddenModule">
+                <div id="headlineCard" class="intelCard headlineCard hiddenModule">
+                  <div class="cardLabel">HEADLINE</div>
+                  <div id="headlineOut" class="headlineText"></div>
+                </div>
+                <div id="impactsCard" class="intelCard impactsCard hiddenModule">
+                  <div class="cardLabel">IMPACTS</div>
+                  <div id="impactsOut" class="impactsText"></div>
+                </div>
+                <div id="confidenceCard" class="miniGrid hiddenModule">
+                  <div class="miniCard">
+                    <span>CONFIDENCE</span>
+                    <b id="confidenceOut"></b>
+                  </div>
+                </div>
+                <div id="riskCard" class="intelCard riskCard hiddenModule">
+                  <div class="cardLabel">ALERTS / RISK</div>
+                  <div id="riskOut" class="riskText"></div>
+                </div>
+              </aside>
+
+              <section id="forecastZone" class="forecastZone">
+                <div id="daysGrid" class="daysGrid"></div>
+                <div id="lowerDeck" class="lowerDeck hiddenModule">
+                  <div id="timingModule" class="lowerModule timingModule hiddenModule">
+                    <div class="moduleLabel">RAIN / STORM TIMING</div>
+                    <div id="timingOut"></div>
+                  </div>
+                  <div id="outdoorModule" class="lowerModule outdoorModule hiddenModule">
+                    <div class="moduleLabel">OUTDOOR IMPACT</div>
+                    <div id="outdoorOut"></div>
+                  </div>
+                  <div id="notesModule" class="lowerModule notesModule hiddenModule">
+                    <div class="moduleLabel">NOTES</div>
+                    <div id="notesOut"></div>
+                  </div>
+                </div>
+              </section>
+            </div>
+
+            <section id="productCanvas" class="productCanvas hiddenProduct" aria-label="RBRTW broadcast product slide"></section>
+
+            <div id="overlayLayer" class="overlayLayer"></div>
+            <footer class="slideFooter">
+              <span>Generated by RBRTW / EWX Auto Weather Studio</span>
+              <span id="footerMeta"></span>
+            </footer>
+          </section>
+        </div>
+      </div>
+    </main>
+
+    <aside class="controlPanel rightPanel noExport">
+      <div class="tabs">
+        <button class="tabBtn active" data-tab="dayTab">Day</button>
+        <button class="tabBtn" data-tab="productTab">Product</button>
+        <button class="tabBtn" data-tab="graphicsTab">Graphics</button>
+        <button class="tabBtn" data-tab="styleTab">Style</button>
+      </div>
+
+      <section id="dayTab" class="tabPanel active">
+        <div class="sectionTitle">Selected Forecast Day</div>
+        <label>Edit day
+          <select id="selectedDay"></select>
+        </label>
+        <div id="dayEditor" class="editorBlock"></div>
+        <div class="buttonGrid">
+          <button id="resetSelectedDay" class="secondaryBtn">Reset Day From NWS</button>
+          <button id="clearSelectedDay" class="secondaryBtn danger">Clear Day</button>
+        </div>
+      </section>
+
+      <section id="productTab" class="tabPanel">
+        <div class="sectionTitle">Product Slide Editor</div>
+        <div id="productEditor" class="editorBlock mutedEditor">Choose a product type from the left panel.</div>
+      </section>
+
+      <section id="graphicsTab" class="tabPanel">
+        <div class="sectionTitle">Insert / Replace Graphics</div>
+        <label>Upload graphic
+          <input id="graphicUpload" type="file" accept="image/*" />
+        </label>
+        <div class="graphicsLibrary" id="graphicsLibrary"></div>
+        <div class="sectionTitle smallTitle">Selected Slide Graphic</div>
+        <div id="overlayEditor" class="editorBlock mutedEditor">Click a slide graphic to edit position, size, layer, opacity, or delete.</div>
+      </section>
+
+      <section id="styleTab" class="tabPanel">
+        <div class="sectionTitle">Broadcast Styling</div>
+        <label>Background style
+          <select id="backgroundStyle">
+            <option value="bg-rbrtw">RBRTW Blue / Purple</option>
+            <option value="bg-severe">Severe Weather</option>
+            <option value="bg-heat">Summer Heat</option>
+            <option value="bg-rain">Rain / Flood</option>
+            <option value="bg-winter">Winter</option>
+            <option value="bg-clean">Clean Dark</option>
+          </select>
+        </label>
+        <label>Brand text
+          <input id="brandInput" value="RBRTW" />
+        </label>
+
+        <div class="grid2">
+          <label>Card density
+            <select id="densityMode">
+              <option value="auto" selected>Auto</option>
+              <option value="big">Big</option>
+              <option value="compact">Compact</option>
+            </select>
+          </label>
+          <label>Hazard style
+            <select id="hazardStyle">
+              <option value="bars" selected>Bars</option>
+              <option value="badges">Badges</option>
+            </select>
+          </label>
+        </div>
+
+        <div class="sectionTitle smallTitle">Day Card Display</div>
+        <label class="checkRow"><input id="showGlobalMetrics" type="checkbox" checked /> Show bottom data on day cards</label>
+        <label class="checkRow"><input id="showBottomTag" type="checkbox" checked /> Show bottom impact strip</label>
+        <label>Bottom impact background
+          <input id="bottomTagColor" type="color" value="#030912" />
+        </label>
+
+        <button id="applyStyle" class="primaryBtn fullBtn">Apply Style</button>
+      </section>
+    </aside>
+  </div>
+
+  <div id="exportCover" class="exportCover noExport">Rendering PNG...</div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
